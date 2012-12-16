@@ -4,5 +4,6 @@ define(['routers/home'], function(router){
     this.router = new router();
   };
 
+  
   return {init: init};
 });

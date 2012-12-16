@@ -7,7 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , uglify = require('express-uglify');
 
 var app = express();
 
@@ -21,6 +22,10 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use(uglify.middleware({ 
+    src: __dirname + '/public',
+    logLevel: 'debug'
+  }));
 });
 
 app.configure('development', function(){

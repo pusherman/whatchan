@@ -13,28 +13,16 @@ define(['jquery', 'backbone', 'underscore'], function($, Backbone, _) {
     lookUp: function(query) {
       //@todo do a reds search on query
       if ( query === 'cnn' ) {
-        this.set({ 
-          name: 'CNN',
-          hd: 1123,
-          sd: 123,
-        });
+        this.set({ name: 'CNN',hd: 1123, sd: 123 });
 
       } else if (query === 'abc') {
-        this.set({ 
-          name: 'ABC',
-          hd: 0,
-          sd: 7,
-        });
+        this.set({ name: 'ABC', hd: 0, sd: 7 });
         
       } else {
-        this.set({ 
-          name: '',
-          hd: 0,
-          sd: 0,
-        });
+        this.set({ name: '', hd: 0, sd: 0 });
       }
       
-    },
+    }
   });
 
   return Channel;

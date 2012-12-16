@@ -20,6 +20,7 @@ function($, Backbone, _, channel, template) {
       var that = this;
       require(['text!templates/channel.html'], function(template) {
         channelView = _.template( template, { channel: that.channel.toJSON() } );
+        $('#searchResults').remove();
         $(that.el).append(channelView);
       });
     },

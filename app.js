@@ -8,7 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  , uglify = require('express-uglify');
+  , uglify = require('express-uglify')
+  , staticAsset = require('static-asset');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.configure(function(){
     src: __dirname + '/public',
     logLevel: 'debug'
   }));
+  app.use(staticAsset(__dirname + "/public/") );
   app.use(express.static(path.join(__dirname, 'public')));
 });
 

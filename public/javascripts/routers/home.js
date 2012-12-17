@@ -15,7 +15,7 @@ function($, Backbone, _, mainView){
     routes: {
       '': 'home',
       'test': 'test',
-      '/search/:query': "search",  // #search/kiwis
+      '/search/:query': "search"
     },
 
     'home': function() {

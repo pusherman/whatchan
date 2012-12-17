@@ -21,6 +21,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
+  app.use(express.compress());
   app.use(uglify.middleware({ 
     src: __dirname + '/public',
     logLevel: 'debug'

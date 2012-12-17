@@ -28,7 +28,7 @@ function($, Backbone, _, mainView){
     
     'search': function(query) {
       alert('searching for: ' + query);
-    },
+    }
   });
 
   return Router;

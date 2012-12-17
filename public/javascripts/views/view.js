@@ -3,7 +3,7 @@ define([
     'backbone',
     'underscore', 
     'models/channel',
-    'text!templates/main.html',], 
+    'text!templates/main.html'], 
 
 function($, Backbone, _, channel, template) {
   var View = Backbone.View.extend({
@@ -18,6 +18,7 @@ function($, Backbone, _, channel, template) {
 
     showResults: function(channel) {
       var that = this;
+      
       require(['text!templates/channel.html'], function(template) {
         channelView = _.template( template, { channel: that.channel.toJSON() } );
         $('#searchResults').remove();
@@ -26,7 +27,7 @@ function($, Backbone, _, channel, template) {
     },
 
     events: {
-      "keypress #channel": "doSearch",
+      "keypress #channel": "doSearch"
     },
 
     render: function() {

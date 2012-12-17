@@ -1,0 +1,1 @@
+define(["jquery","backbone","underscore","views/view"],function(e,t,n,r){var i=t.Router.extend({initialize:function(){this.mainView=r,t.history.start()},routes:{"":"home",test:"test","/search/:query":"search"},home:function(){this.mainView.render()},test:function(){alert("test")},search:function(e){alert("searching for: "+e)}});return i})

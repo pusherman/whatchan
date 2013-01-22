@@ -5,7 +5,7 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
+  , channel = require('./routes/channel')
   , http = require('http')
   , path = require('path')
   , uglify = require('express-uglify')
@@ -23,11 +23,13 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.compress());
+/*
   app.use(uglify.middleware({ 
     src: __dirname + '/public',
     logLevel: 'debug'
   }));
   app.use(staticAsset(__dirname + "/public/") );
+*/
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -36,7 +38,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/search', channel.search);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

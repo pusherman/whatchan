@@ -11,7 +11,8 @@
     "reds": "~0.2.2",
     "redis": "~0.8.2",
     "express-uglify": "~0.3.1",
-    "static-asset": "~0.5.0"
+    "static-asset": "~0.5.0",
+    "csv": "~0.2.4"
   },
   "readmeFilename": "README",
   "description": "I don't watch TV enough to remember what channels are what. This is an attempt to help me remember.",

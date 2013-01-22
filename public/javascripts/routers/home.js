@@ -2,7 +2,7 @@ define([
   'jquery', 
   'backbone', 
   'underscore', 
-  'views/view'], 
+  'views/search'], 
 function($, Backbone, _, mainView){
   
   var Router = Backbone.Router.extend({
@@ -14,21 +14,11 @@ function($, Backbone, _, mainView){
 
     routes: {
       '': 'home',
-      'test': 'test',
-      '/search/:query': "search"
     },
 
     'home': function() {
       this.mainView.render();
     },
-    
-    'test': function() {
-      alert('test');
-    },
-    
-    'search': function(query) {
-      alert('searching for: ' + query);
-    }
   });
 
   return Router;

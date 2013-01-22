@@ -23,13 +23,11 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.compress());
-/*
   app.use(uglify.middleware({ 
     src: __dirname + '/public',
     logLevel: 'debug'
   }));
   app.use(staticAsset(__dirname + "/public/") );
-*/
   app.use(express.static(path.join(__dirname, 'public')));
 });
 

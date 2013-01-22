@@ -16,7 +16,7 @@ function($, Backbone, _, template) {
     // render
     render: function() {
       return this.template({channel: this.model.toJSON()});
-    },
+    }
 
   });
 

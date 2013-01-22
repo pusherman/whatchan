@@ -9,7 +9,7 @@ function($, Backbone, _) {
       name: null,
       hd: 0,
       sd: 0
-    },
+    }
   });
 
   return Channel;

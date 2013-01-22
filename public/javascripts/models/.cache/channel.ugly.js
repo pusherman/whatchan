@@ -1,1 +1,1 @@
-define(["jquery","backbone","underscore"],function(e,t,n){var r=t.Model.extend({defaults:{name:null,hd:0,sd:0},initialize:function(){this.search="hihi",console.log("init!")},lookUp:function(e){e==="cnn"?this.set({name:this.search,hd:11,sd:13}):e==="abc"?this.set({name:"ABC",hd:0,sd:7}):this.set({name:"",hd:0,sd:0}),console.log(this.search)}});return r})
+define(["jquery","backbone","underscore"],function(e,t,n){var r=t.Model.extend({defaults:{name:null,hd:0,sd:0}});return r})

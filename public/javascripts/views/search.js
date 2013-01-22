@@ -36,6 +36,7 @@ function($, Backbone, _, channelSearch, template) {
 
     // render this view (the search form)
     render: function() {
+      $(this.el).empty();
       $(this.el).append(this.template);
     },
 

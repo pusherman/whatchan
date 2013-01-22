@@ -1,1 +1,0 @@
-define(["jquery","backbone","underscore","views/search"],function(e,t,n,r){var i=t.Router.extend({initialize:function(){this.mainView=new r({router:this}),t.history.start({pushState:!0})},routes:{"":"home",":query":"find"},home:function(){console.log("rendering main view"),this.mainView.render()},find:function(e){this.mainView.render(),this.mainView.findChannel(e)}});return i})

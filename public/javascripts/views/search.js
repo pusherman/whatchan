@@ -5,8 +5,8 @@ define([
     'collections/channelSearch',
     'text!templates/main.html'], 
 
-function($, Backbone, _, ChannelSearch, template) {
-  var SearchForm = Backbone.View.extend({
+function($, Backbone, _, channelSearch, template) {
+  var searchForm = Backbone.View.extend({
     el: '#container',
     channels: [],
 
@@ -14,24 +14,22 @@ function($, Backbone, _, ChannelSearch, template) {
       "keypress #channel": "doSearch"
     },
 
-    initialize: function() {
+    initialize: function(opts) {
       this.template = _.template(template);
+      this.router = opts.router;
     },
 
     // render a specific search result
-    /**
-     * @todo should this just be a "results" view
-     *       rather than a view for a specific result?
-     */
     renderSearchResult: function(channel) {
       var that = this;
-      console.log(this);
+
       require(['views/result'], function (resultView) {
         resultView.model = channel;
         that.$('#search-results').append(resultView.render());
       });
     },
 
+    // render each result found from the entire collection
     renderSearchResults: function(channels) {
       channels.each(this.renderSearchResult);
     },
@@ -41,14 +39,22 @@ function($, Backbone, _, ChannelSearch, template) {
       $(this.el).append(this.template);
     },
 
+    // perform the search and populate the collection with the results
+    findChannel: function(searchQuery) {
+      $('#channel').val(searchQuery);
+      channels = new channelSearch([], {query: searchQuery});
+      channels.on("reset", this.renderSearchResults, this).fetch();      
+    },
+
+    // handle the enter keypress from the search box
     doSearch: function(e) {
       if (e.keyCode != 13) return;
 
-      channels = new ChannelSearch([], {query: $('#channel').val()});
-      channels.on("reset", this.renderSearchResults, this).fetch();
-    }
+      this.findChannel($('#channel').val());
+      this.router.navigate($('#channel').val());
+    },
 
   });
 
-  return new SearchForm();
+  return searchForm;
 });

@@ -10,11 +10,6 @@ function($, Backbone, _) {
       hd: 0,
       sd: 0
     },
-
-    initialize: function() {
-      console.log('init!');
-    },
-
   });
 
   return Channel;

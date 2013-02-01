@@ -8,25 +8,33 @@ var csv = require('csv'),
     reds = require('reds'),
     redis = require('redis');
 
+/*
 reds.client = redis.createClient(10000, "localhost"); 
 reds.client.auth("3ca6ef43-4132-4f05-aab7-e72f6342b61a", function() {
+*/
 
-  var search = reds.createSearch(process.argv[2]);
+  var search = reds.createSearch('search:' + process.argv[2]);
 
   csv()
     .from.stream(fs.createReadStream(__dirname+'/' + process.argv[3]))
     .on('record', function(data,index) {
       search.index(data[1], data[0]);
-
+      reds.client.set(process.argv[2] + ':channel:' + data[0], data[1]);
+      console.log('setting: ' + process.argv[2] + ':channel:' + data[0]);
     })
     .on('end', function(count) {
       console.log(count + ' channels indexed.');
 
-      console.log('starting search');
+      console.log('starting search for abc');
       search.query('abc').end(function(err, ids){
         console.log(ids);
+        console.log(err);
+        reds.client.get(process.argv[2] + ':channel:' + ids[0], function(err, reply) {
+          console.log(reply.toString());
+        });
+
       });
       
     });
 
-});
+/* }); */

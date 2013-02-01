@@ -9,9 +9,11 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , uglify = require('express-uglify')
-  , staticAsset = require('static-asset');
+  , staticAsset = require('static-asset')
+  , reds = require('reds'),
+    redis = require('redis');
 
-var app = express();
+app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -31,12 +33,27 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+/*
+reds.client = redis.createClient(10000, "localhost"); 
+reds.client.auth("3ca6ef43-4132-4f05-aab7-e72f6342b61a", function() {
+  app.locals({
+    searchClient: reds.createSearch('search:wilmington'),
+    dbClient: reds.client
+  });
+});
+*/
+
+app.locals({
+  searchClient: reds.createSearch('search:wilmington'),
+  dbClient: reds.client
+});
+
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
 app.get('/', routes.index);
-app.get('/search', channel.search);
+app.get('/search/:channel', channel.search);
 app.get('/:id', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){

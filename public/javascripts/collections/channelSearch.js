@@ -14,7 +14,7 @@ function($, Backbone, _, Channel) {
     },
 
     url: function(){
-      return "/search?q=" + this.query;
+      return "/search/" + this.query;
     }
   });
 

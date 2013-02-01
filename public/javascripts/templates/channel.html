@@ -1,23 +1,9 @@
 <div id="searchResults">
-  <% if (channel.hd > 0) { %>
   <span class="large">
-    <%= channel.name %> is on <%= channel.hd %>
+    <% if (channel.number > 0) { %>
+      <%= channel.network %> is on <%= channel.number %>
+    <% } else { %>
+      idk
+    <% } %>
   </span>
-
-  <br />
-
-  <span class="minor">
-    (<%= channel.sd %> in sd)
-  </span>
-  
-  <% } else if (channel.sd > 0) { %>
-  <span class="large">
-    <%= channel.name %> is on <%= channel.sd %>
-  </span>
-
-  <% } else { %>
-  <span class="large">
-    idk
-  </span>
-  <% } %>
 </div>

@@ -21,8 +21,8 @@ exports.search = function(req, res){
         var t = re.test(x.network), 
             u = re.test(y.network);
 
-        if (t == u) 
-          return ((x.number < y.number) ? 1 : -1);
+        if (t === u) 
+          return x.number < y.number ? 1 : -1;
 
         return t ? -1 : 1;
       }));

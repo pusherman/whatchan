@@ -29,9 +29,18 @@ function($, Backbone, _, channelSearch, template) {
       });
     },
 
+    renderNoResults: function() {
+      var that = this;
+      require(['views/not-found'], function (notFoundView) {
+        that.$('#search-results').append(notFoundView.render());
+      });
+    },
+
     // render each result found from the entire collection
     renderSearchResults: function(channels) {
-      channels.each(this.renderSearchResult);
+      channels.length == 0 ? 
+        this.renderNoResults() :
+        channels.each(this.renderSearchResult);
     },
 
     // render this view (the search form)

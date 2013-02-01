@@ -33,16 +33,6 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-/*
-reds.client = redis.createClient(10000, "localhost"); 
-reds.client.auth("3ca6ef43-4132-4f05-aab7-e72f6342b61a", function() {
-  app.locals({
-    searchClient: reds.createSearch('search:wilmington'),
-    dbClient: reds.client
-  });
-});
-*/
-
 app.locals({
   searchClient: reds.createSearch('search:wilmington'),
   dbClient: reds.client

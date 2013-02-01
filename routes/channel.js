@@ -18,11 +18,13 @@ exports.search = function(req, res){
       var re = new RegExp(".*(" + req.params.channel + ").*","i");
 
       res.send(results.sort(function(x,y){
-        var t = re.test(x.network), u = re.test(y.network);
-        if (t && u && x.number < y.number) { return 1; }
-        else if (!t && !u && x.number < y.number) { return 1; }
-        else if (t && !u) { return -1; }
-        else if (!t && u) { return 1; }
+        var t = re.test(x.network), 
+            u = re.test(y.network);
+
+        if (t == u) 
+          return ((x.number < y.number) ? 1 : -1);
+
+        return t ? -1 : 1;
       }));
     });
   });

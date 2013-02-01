@@ -1,7 +1,5 @@
 exports.search = function(req, res){
 
-console.log('searching for ' + req.params.channel);
-
   app.locals.searchClient.query(req.params.channel).end(function(err, ids) {
 
     // build the multi get query
@@ -15,15 +13,16 @@ console.log('searching for ' + req.params.channel);
         results.push({number: parseInt(ids[i]), network: replies[i]});
       }
 
-      // send the results off to the client
-      res.send(results.sort(function(a,b) { 
-        if (a.number > b.number)  
-          return -1;
+      // sort the results based on if the query matches
+      // the network name then by desc order in channel number
+      var re = new RegExp(".*(" + req.params.channel + ").*","i");
 
-        if (a.number < b.number)
-          return 1;
-
-        return 0;
+      res.send(results.sort(function(x,y){
+        var t = re.test(x.network), u = re.test(y.network);
+        if (t && u && x.number < y.number) { return 1; }
+        else if (!t && !u && x.number < y.number) { return 1; }
+        else if (t && !u) { return -1; }
+        else if (!t && u) { return 1; }
       }));
     });
   });

@@ -1,6 +1,9 @@
 exports.search = function(req, res){
 
-  app.locals.searchClient.query(req.params.channel).end(function(err, ids) {
+  // get the search client based on the subdomain
+  searchClient = app.locals.db.createSearch('search:' + req.subdomains[0]);
+
+  searchClient.query(req.params.channel).end(function(err, ids) {
 
     // build the multi get query
     searchFor = ids.map(function(channel) { 
@@ -8,8 +11,8 @@ exports.search = function(req, res){
     });
 
     // lookup each channel name for each of the found keys
-    app.locals.dbClient.multi(searchFor).exec(function (err, replies) {
-      for(i=0,results=[];i<replies.length;++i) {
+    app.locals.db.client.multi(searchFor).exec(function (err, replies) {
+      for(i=0,results=[]; i<replies.length; ++i) {
         results.push({number: parseInt(ids[i]), network: replies[i]});
       }
 

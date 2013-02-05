@@ -10,8 +10,8 @@ var express = require('express')
   , path = require('path')
   , uglify = require('express-uglify')
   , staticAsset = require('static-asset')
-  , reds = require('reds'),
-    redis = require('redis');
+  , reds = require('reds')
+  , redis = require('redis');
 
 app = express();
 
@@ -33,9 +33,19 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+/*
 app.locals({
   searchClient: reds.createSearch('search:wilmington'),
   dbClient: reds.client
+});
+*/
+
+
+app.locals({
+  db: reds,
+  availableMarkets: [
+    'wilmington'
+  ]
 });
 
 app.configure('development', function(){
